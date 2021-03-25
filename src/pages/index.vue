@@ -1,13 +1,17 @@
 <template>
   <div class="container">
-    <canvas ref="canvas" width="300" height="300"></canvas>
+    <!-- <canvas ref="canvas" width="300" height="300"></canvas> -->
+    <div  style="padding-top:500px;padding-left:200px;">
 
+      <appProgress :precentage="66"/>
+    </div>
 
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import appProgress from '@/components/app-progress'
 export default {
   data() {
     return {
@@ -20,16 +24,16 @@ export default {
       maxR:1000,
     };
   },
-  components: {},
+  components: {appProgress},
   created(){
     this.width = document.documentElement.clientWidth;
     this.height = document.documentElement.clientHeight;
   },
   mounted(){
-    let canvas = this.$refs.canvas;
-    this.ctx = canvas.getContext('2d');
-    // // this.init();
-    this.animation2();
+    // let canvas = this.$refs.canvas;
+    // this.ctx = canvas.getContext('2d');
+    // // // this.init();
+    // this.animation2();
     // axios('/api/haha').then(res=>{console.log(res)})
   },
   methods: {
@@ -50,10 +54,10 @@ export default {
     },
     draw(star){
       let ctx = this.ctx;
+      ctx.beginPath();
       ctx.strokeStyle = star.color;
       ctx.lineWidth = 50;
       ctx.shadowBlur = star.r * 2;
-      ctx.beginPath();
       ctx.arc(star.x, star.y, star.r, 0, 2 * Math.PI, false);
       ctx.closePath();
       ctx.stroke();
